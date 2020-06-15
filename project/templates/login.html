@@ -1,0 +1,59 @@
+{% extends "base_template/base.html" %}
+{% block content %}
+    <h3 class="block-title">Вход</h3>
+    <div class="row">
+        <div class="col-md-6">
+            <form class="login-form" action="{{ url_for('login') }}" method="POST" id="login_form">
+                {{ forms.hidden_tag() }}
+                <div class="form-control-wrap">
+                    <div class="form-group">
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                                {% for category, message in messages %}
+                                    <div class="alert alert-{{ category }}">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                        {% if forms.email.errors %}
+                            {{ forms.email(class="form-control input-shadow is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in forms.email.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <label>Email </label>
+                            {{ forms.email(class="form-control",type="email", placeholder="Email") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {% if forms.password.errors %}
+                            {{ forms.password(class="form-control input-shadow is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in forms.password.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <label>Пароль</label>
+                            {{ forms.password(class="form-control", placeholder="Пароль", type="password") }}
+                        {% endif %}
+                    </div>
+                    <div class="login-checkbox">
+                        <label>
+                            {{ forms.remember_me(for="user-checkbox") }}
+                            {{ forms.remember_me.label }}
+                        </label>
+                    </div>
+
+                    {{ forms.submit(type="submit", class="btn login-enter") }}
+                    <a class="btn open-register" href="{{ url_for('register') }}">Регистрация</a>
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+{% endblock %}

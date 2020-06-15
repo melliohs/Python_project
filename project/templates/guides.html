@@ -1,0 +1,33 @@
+{% extends "base_template/base.html" %}
+{% block content %}
+
+                    <div class="block-content">
+                        <h3 class="block-title">Гайды {% if current_user.is_authenticated %}<a class="btn" style="left: 550px;" href="{{ url_for('add_guides') }}">Добавить</a>{% endif %}</h3>
+
+                        <div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Имя</th>
+        <th>Описание</th>
+         <th>Действие</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for guide in guides %}
+      <tr>
+        <td style="width:180px;!important"><img src="{{ image + guide.image }}" style="max-width: 100%" alt=""></td>
+        <td>{{ guide.name }}</td>
+
+        <td>{{ guide.small_description }}</td>
+        <td><a class="open-post" href="/guides/{{ guide.id }}">посмотреть</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+                    </div>
+
+
+{% endblock %}

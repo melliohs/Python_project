@@ -1,0 +1,103 @@
+{% extends "base_template/base.html" %}
+{% block content %}
+    <h3 class="block-title">Регистрация</h3>
+    <div class="row">
+        <div class="col-md-6">
+            <form class="register-form" action="{{ url_for('register') }}" method="POST" id="login_form">
+                {{ form.hidden_tag() }}
+                <div class="form-control-wrap">
+                    <div id="message" class="alert alert-danger alert-dismissible fade"></div>
+                    <div class="form-group">
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                                {% for category, message in messages %}
+                                    <div class="alert alert-{{ category }}">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                        {% if form.name.errors %}
+                            {{ form.name(class="form-control input-shadow is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.name.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <label>Имя</label>
+                            {{ form.name(class="form-control",type="text", placeholder="Имя") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {% if form.surname.errors %}
+                            {{ form.surname(class="form-control input-shadow is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.surname.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <label>Фамилия</label>
+                            {{ form.surname(class="form-control",type="text", placeholder="Фамилия") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {% if form.username.errors %}
+                            {{ form.username(class="form-control input-shadow is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.username.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <label>Логин</label>
+                            {{ form.username(class="form-control",type="text", placeholder="Логин") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {% if form.email.errors %}
+                            {{ form.email(class="form-control input-shadow is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.email.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <label>Email</label>
+                            {{ form.email(class="form-control",type="email", placeholder="Email") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {% if form.password.errors %}
+                            {{ form.password(class="form-control input-shadow is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.password.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <label>Пароль</label>
+                            {{ form.password(class="form-control",type="password", placeholder="Пароль") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {% if form.confirm_password.errors %}
+                        {{ form.confirm_password(class="form-control input-shadow is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.confirm_password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <label>Повторите пароль</label>
+                        {{ form.confirm_password(class="form-control",type="password", placeholder="Повторите пароль") }}
+                    {% endif %}
+                    </div>
+
+                </div>
+                {{ form.submit(class="btn") }}
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base_template/base.html" %}
+{% block content %}
+<div id="blog-header" style="background: url({{ image + guide.image }}); background-size: cover;">
+    <div class="overlay"></div>
+    <div class="single-post-title">
+        <h1>{{ guide.name}}</h1>
+        <p class="post-info">
+            <span class="post-author">Автор: {{ guide.author }}</span>
+            <span class="slash"></span>
+            <span class="post-date">{{ guide.date}}</span>
+            <span class="slash"></span>
+        </p>
+    </div>
+</div>
+<div class="block-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div id="single-post">
+                <div class="post">
+                    <div class="post-body">
+                        <p>{{ guide.description }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

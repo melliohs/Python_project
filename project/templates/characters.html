@@ -1,0 +1,28 @@
+{% extends "base_template/base.html" %}
+{% block content %}
+                    <h3 class="block-title">Персонажи</h3>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="portfolio-container row isotope" id="portfolio-container">
+                                   {% for character in characters %}
+                                    <div class="col-md-4 col-sm-6 col-xs-12 portfolio-item artwork">
+                                        <a class="open-project" href="/character/{{ character.id }}">
+                                            <div class="portfolio-column">
+                                                <div class="portfolio-hover">
+                                                    <div class="portfolio-content">
+                                                        <h2>{{ character.name }}</h2>
+                                                        <hr>
+                                                        <p>Подробнее</p>
+                                                    </div>
+                                                    <div class="portfolio-overlay"></div>
+                                                </div>
+                                                <img src="{{ image + character.image }}" alt="">
+                                            </div>
+                                        </a>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+{% endblock %}

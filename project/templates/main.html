@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ValoPlay - {{ title }}</title>
+    <meta name="description" content="Project by Danila Polyakov">
+    <meta name="author" content="Danila Polyakov" />
+    <link rel="icon" href={{ url_for("static", filename='images/favicon.ico') }}>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+    <link rel="stylesheet" href={{ url_for("static", filename='css/plugins.min.css') }} type="text/css" media="screen">
+    <link rel="stylesheet" href={{ url_for("static", filename='css/style.css') }} type="text/css" media="screen">
+
+</head>
+
+<body>
+    <div class="preloader">
+        <div class="anim pulse"><i class="ion-ios-bolt-outline"></i></div>
+    </div>
+
+    <section class="home img-bg" style="background: url({{ bg }}) 0 0; background-size: cover;">
+        <div class="overlay opacity5"></div>
+        <div class="container">
+            <div class="name-block">
+                <div class="name-block-container">
+                    <img  src="{{ logo }}" alt="" />
+                    {% if current_user.is_authenticated %}
+                    <h2>Привет, {{ current_user.name }}</h2>
+                    <a href="{{ url_for('logout') }}" class="btn ">Выйти</a>
+                    {% else %}
+                    <h2>Добро пожаловать!</h2>
+                    <a href="{{ url_for('login') }}" class="btn open-login">Войти</a>
+                    {% endif %}
+                    <ul class="social">
+                        <li><a href=""><i class="ion-social-facebook"></i></a></li>
+                        <li><a href=""><i class="ion-social-twitter"></i></a></li>
+                        <li><a href=""><i class="ion-social-googleplus"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="menu-blocks">
+               <a href="{{ url_for('characters')}}"><div class="portfolio-block  menu-block">
+                    <div class="portfolio-block-container">
+                        <h2 class="portfolio menu-item">Персонажи</h2>
+                    </div>
+                </div></a>
+                <a href="{{ url_for('new')}}"><div class="blog-block  menu-block">
+                    <div class="blog-block-container">
+                        <h2 class="blog menu-item">Новости</h2>
+                    </div>
+                </div></a>
+               <a href="{{ url_for('guides')}}"><div class="about-block menu-block">
+                    <div class="about-block-container">
+                        <h2 class="about menu-item">Гайды</h2>
+                    </div>
+               </div></a>
+                <a href="{{ url_for('profile')}}"><div class="contact-block  menu-block">
+                    <div class="contact-block-container">
+                        <h2 class="contact menu-item">Профиль</h2>
+                    </div>
+                </div></a>
+            </div>
+        </div>
+        <div class="cursor"></div>
+
+
+
+    </section>
+    <script src="{{ url_for('static', filename='js/plugins.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+</body>
+
+</html>

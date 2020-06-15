@@ -1,0 +1,31 @@
+{% extends "base_template/base.html" %}
+{% block content %}
+<div id="blog-header" style="background: url({{ image + news.image }}); background-size: cover;">
+    <div class="overlay"></div>
+    <div class="single-post-title">
+        <h1>{{ news.name}}</h1>
+        <p class="post-info">
+            <span class="post-author">Автор: {{ news.author }}</span>
+            <span class="slash"></span>
+            <span class="post-date">{{ news.date}}</span>
+            <span class="slash"></span>
+            <span class="post-catetory">{{ news.category }}</span>
+        </p>
+    </div>
+</div>
+<div class="block-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div id="single-post">
+                <div class="post">
+                    <div class="post-body">
+                        <p>{{ news.description }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

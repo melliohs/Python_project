@@ -1,0 +1,102 @@
+{% extends "base_template/base.html" %}
+{% block content %}
+
+    <h3 class="block-title">Профиль</h3>
+
+
+    <form class="profile-form" action="{{ url_for('profile') }}" enctype="multipart/form-data" method="post"
+          id="profile_form">
+        {{ form.hidden_tag() }}
+        <div class="form-control-wrap">
+            <div id="message" class="alert alert-danger alert-dismissible fade"></div>
+            <div class="row" style="margin-bottom: 50px;">
+                <div class="col-md-6">
+                    <img class="rounded-circle mx-auto d-block" style="max-width:65%" src="{{ icons_file }}"/>
+                </div>
+                <div class="col-md-6">
+                    <p class="form-control-static" style="padding-bottom: 50px;">
+                    <h2>{{ current_user.name }} {{ current_user.surname }}</h2></p>
+                </div>
+
+            </div>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <div class="form-group has-feedback">
+                {% if form.name.errors %}
+                    {{ form.name(class="form-control input-shadow is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.name.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.name(class="form-control", type="text", placeholder="Имя") }}
+                {% endif %}
+                <small class="help-block form-text">Пожалуйста введите имя</small>
+            </div>
+
+            <div class="form-group">
+                {% if form.surname.errors %}
+                    {{ form.surname(class="form-control input-shadow is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.surname.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.surname(class="form-control",type="text", placeholder="Фамилия") }}
+                {% endif %}
+                <small class="help-block form-text">Пожалуйста введите фамилию</small>
+            </div>
+        </div>
+        <div class="form-group">
+            {% if form.username.errors %}
+                {{ form.username(class="form-control input-shadow is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.username.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.username(class="form-control",type="text", placeholder="Логин") }}
+            {% endif %}
+            <small class="help-block form-text">Пожалуйста введите логин</small>
+        </div>
+
+        <div class="form-group">
+            {% if form.email.errors %}
+                {{ form.email(class="form-control input-shadow is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.email.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.email(class="form-control",type="email",id="email-input", placeholder="Email") }}
+            {% endif %}
+            <small class="help-block form-text">Пожалуйста введите email</small>
+        </div>
+        <div class="row form-group">
+            <div class="col-12 col-md-9">
+                {{ form.picture(class="form-control-file") }}
+                <small class="help-block form-text">Пожалуйста выберете картинку</small>
+                {% if form.picture.errors %}
+                    {% for error in form.picture.errors %}
+                        <span class="text-danger">{{ error }}</span></br>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        {{ form.submit(class="btn btn-outline-info") }}
+
+    </form>
+
+
+{% endblock %}
